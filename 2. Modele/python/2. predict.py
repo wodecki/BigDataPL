@@ -15,6 +15,10 @@ train_data = TimeSeriesDataFrame.from_data_frame(
 predictor = TimeSeriesPredictor.load("autogluon-iowa-daily")
 predictions = predictor.predict(train_data)
 
+print("=== Current Predictions ===")
+print(predictions.head())
+print(f"Predictions shape: {predictions.shape}")
+
 #get "mean" for the max value of timestamp in df for item_id = "BLACK VELVET"
 
 # Filter the predictions for 'BLACK VELVET'
@@ -37,4 +41,13 @@ future_data = TimeSeriesDataFrame.from_data_frame(
 )
 
 future_predictions = predictor.predict(future_data)
-future_predictions.head()
+print("\n=== Future Predictions (3 months ahead) ===")
+print(future_predictions.head())
+print(f"Future predictions shape: {future_predictions.shape}")
+
+print("\n=== All Items Future Predictions Summary ===")
+for item in future_predictions.index.get_level_values(0).unique():
+    item_pred = future_predictions.loc[item]
+    max_ts = item_pred.index.max()
+    mean_val = item_pred.loc[max_ts, 'mean']
+    print(f"{item}: {mean_val:.2f} (on {max_ts})")

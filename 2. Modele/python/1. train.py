@@ -46,7 +46,7 @@ predictor = TimeSeriesPredictor(
 predictor.fit(
     train_data,
     presets="medium_quality",
-    time_limit=600,
+    time_limit=200,
 )
 
 # Make predictions
@@ -57,3 +57,6 @@ predictions.head()
 import matplotlib.pyplot as plt
 # Plot 4 randomly chosen time series and the respective forecasts
 predictor.plot(test_data, predictions, quantile_levels=[0.1, 0.9], max_history_length=200, max_num_item_ids=4)
+plt.savefig("predictions_plot.png", dpi=300, bbox_inches='tight')
+plt.savefig("predictions_plot.pdf", bbox_inches='tight')
+print("Plots saved as predictions_plot.png and predictions_plot.pdf")

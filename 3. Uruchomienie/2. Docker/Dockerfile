@@ -1,12 +1,20 @@
 FROM python:3.10
 
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Set working directory
+WORKDIR /app
+
+# Copy pyproject.toml and uv.lock first for better caching
+COPY pyproject.toml uv.lock ./
+
+# Install dependencies using uv
+RUN uv sync --frozen
+
 # Copy the entire project directory
 COPY . /app
 
-WORKDIR /app
-
-#RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install -r requirements.txt
 # Make port 8003 available to the world outside this container
 EXPOSE 8003
 
@@ -15,5 +23,5 @@ ENV MODULE_NAME="main"
 ENV VARIABLE_NAME="app"
 ENV PORT=8003
 
-# Run app.py when the container launches
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8003"]
+# Run app.py when the container launches using uv run
+CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8003"]

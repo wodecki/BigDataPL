@@ -6,7 +6,7 @@ from autogluon.timeseries import TimeSeriesDataFrame, TimeSeriesPredictor
 app = FastAPI()
 
 # Load the model when starting the app
-predictor = TimeSeriesPredictor.load("autogluon-iowa-daily")
+predictor = TimeSeriesPredictor.load("model", require_version_match=False) 
 
 # Define a request body model
 class ItemRequest(BaseModel):

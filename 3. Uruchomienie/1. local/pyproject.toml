@@ -1,0 +1,11 @@
+[project]
+name = "iowa-sales-models"
+version = "0.1.0"
+description = "AutoGluon time series prediction models for Iowa sales data"
+readme = "README.md"
+requires-python = ">=3.8,<3.13"
+dependencies = [
+    "pandas",
+    "autogluon.timeseries",
+    "matplotlib",
+]

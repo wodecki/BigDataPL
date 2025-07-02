@@ -1,8 +1,0 @@
-autogluon-common==1.1.0
-autogluon-core==1.1.0
-autogluon-features==1.1.0
-autogluon-tabular==1.1.0
-autogluon-timeseries==1.1.0
-uvicorn==0.29.0
-fastapi==0.110.2
-streamlit==1.33.0

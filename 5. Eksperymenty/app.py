@@ -1,10 +1,13 @@
 import os
 from openai import OpenAI
 import streamlit as st
+import dotenv
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+dotenv.load_dotenv(override=True)
 
-st.title("My own chatbot! No that serious...")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+st.title("My own chatbot! Styl nowoczesny..")
 st.text('Dlaczego niebo jest niebieskie?')
 
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -14,7 +17,7 @@ if "openai_model" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "system", "content": "You are cultural academic teacher \
-        answering question in modern style."}]
+        answering question in a modern style."}]
 
 for message in st.session_state.messages:
     if message["role"] != "system":

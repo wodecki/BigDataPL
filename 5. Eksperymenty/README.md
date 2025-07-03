@@ -1,6 +1,7 @@
 lokalnie:
 docker build . -t chat
-docker run -d -p 8000:8000 chat
+docker run -d -p 8000:8000 -e PORT=8000 chat
+check: http://localhost:8000/
 
 GCP run:
 1. Dla pierwszej wersji app.py:
